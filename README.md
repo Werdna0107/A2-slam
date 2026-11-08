@@ -144,6 +144,5 @@ decompiling, disassembling and modification are not allowed.** Full text:
 - Telegram — https://t.me/a2blog
 - YouTube — https://www.youtube.com/@a2-lab
 - OpenSLAM — https://github.com/Werdna0107/OpenSLAM
-- Website — https://a2-lab.ru
 
 <sub>#SLAM #LiDAR #PointCloud #Livox #Mid360 #SHAREslam #ROS #rosbag #LAS #Odometry #Mapping #3DScanning #Surveying #Geodesy #RTK #GNSS #GCP #ControlPoints #PointCloudProcessing #Windows #Android</sub>
