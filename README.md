@@ -5,26 +5,24 @@
 <h1 align="center">A2 mapper</h1>
 
 <p align="center">
-  <b>Point clouds from SLAM scanner recordings. Fast, accurate, free.</b><br>
-  Windows · Android
+  Point clouds from SLAM scanner recordings.<br>
+  Windows · Android · free
 </p>
 
 <p align="center">
-  <a href="v4/A2-mapper-v4.exe"><b>⬇ Windows (.exe)</b></a> ·
-  <a href="v4/A2-mapper-v4.apk"><b>⬇ Android (.apk)</b></a> ·
-  <a href="https://t.me/a2blog">Telegram</a> ·
-  <a href="https://www.youtube.com/@a2-lab">YouTube</a>
+  <a href="v4/A2-mapper-v4.exe"><b>⬇ Download for Windows (.exe)</b></a> &nbsp;·&nbsp;
+  <a href="v4/A2-mapper-v4.apk"><b>⬇ Download for Android (.apk)</b></a>
 </p>
 
 <p align="center">
-  <img src="docs/window-light.png" width="46%" alt="A2 mapper, light theme">
-  <img src="docs/window-dark.png" width="46%" alt="A2 mapper, dark theme">
+  <img src="docs/window-light.png" width="48%" alt="A2 mapper, light theme">
+  <img src="docs/window-dark.png" width="48%" alt="A2 mapper, dark theme">
 </p>
 
 ## What it is
 
-A2 mapper builds a dense, clean **point cloud (`.las`) and a trajectory
-(`.txt`)** from raw SLAM scanner recordings:
+A2 mapper builds a dense **point cloud (`.las`) and a trajectory (`.txt`)** from
+raw SLAM scanner recordings. It reads:
 
 - **ROS1 bag files** (`.bag`, uncompressed) with the topics `/livox/lidar`
   (`livox_ros_driver2/CustomMsg`) and `/livox/imu` (`sensor_msgs/Imu`) —
@@ -32,32 +30,40 @@ A2 mapper builds a dense, clean **point cloud (`.las`) and a trajectory
 - **`.bin` recordings** of **A2 scanners** — see the
   [OpenSLAM](https://github.com/Werdna0107/OpenSLAM) project.
 
-The odometry algorithm was designed and written by the author independently.
-It is not derived from, and does not reuse code of, well-known open-source SLAM
-implementations.
+### Features
 
-Everything runs on your own device. No account, no network, no cloud: your
-recordings never leave your computer or phone.
+- **Colour for SHARE S20 scans.** Choose the whole scan folder (the one with the
+  `all_*.bag` and the `info` folder) and the point cloud comes out **coloured**
+  from the scanner's cameras. Choose a single file and you get a grey cloud.
+- **Control points (RTK).** The trajectory can be corrected by your control
+  points, and the cloud comes out in their coordinates — see
+  [below](#control-points-rtk--trajectory-correction).
+- **Closed loop.** Start and finish are tied together when the recording is made
+  as described [below](#getting-the-best-quality-record-a-closed-loop).
+- **Private.** Everything runs on your own device. No account, no network, no
+  cloud: your recordings never leave your computer or phone.
+
+The odometry algorithm was designed and written by the author independently. It
+is not derived from, and does not reuse code of, well-known open-source SLAM
+implementations.
 
 ## Download
 
 | Platform | File | Notes |
 |---|---|---|
 | Windows 10 / 11, x64 | [`v4/A2-mapper-v4.exe`](v4/A2-mapper-v4.exe) | one file, 1.6 MB, nothing to install |
-| Android 8.0+, arm64 | [`v4/A2-mapper-v4.apk`](v4/A2-mapper-v4.apk) | runs the same engine on the phone (no control points) |
+| Android 8.0+, arm64 | [`v4/A2-mapper-v4.apk`](v4/A2-mapper-v4.apk) | the same engine on the phone (no control points) |
 
 SHA-256 checksums: [`v4/SHA256SUMS.txt`](v4/SHA256SUMS.txt). The program is not
 code-signed, so Windows SmartScreen may warn you on first start: choose
-*More info → Run anyway*. On Android allow installation from this source.
+*More info → Run anyway*. On Android, allow installation from this source.
 
 ## How to use (Windows)
 
 1. Start **A2-mapper-v4.exe**.
 2. Choose the recording:
    - **File** — a `.bag` or `.bin` recording → grey point cloud;
-   - **Folder** — a whole **SHARE S20 scan folder** (the one with the `all_*.bag`
-     and the `info` folder) → the cloud is also **coloured** from the scanner's
-     cameras. For colour you must pick the folder, not the file.
+   - **Folder** — a whole **SHARE S20 scan folder** → **coloured** point cloud;
    - or just drop a file or a folder into the window.
 3. The output folder is suggested automatically. Press **Build**.
 4. You get two files in the output folder: **`cloud.las`** and
@@ -121,27 +127,11 @@ Used columns: `board_real_ns`, `lat_deg`, `lon_deg`, `h_ellps_m` (optionally
 `hacc_m`, `vacc_m`, `carr_soln`). Only RTK-fixed points (`carr_soln = 2`) are
 used; the result is in local east-north-up metres around the first point.
 
-## Accuracy and speed
-
-Pure SLAM (no RTK used in the processing), measured against RTK on three real
-scans. Deviation from the reference, RMS in cm, plan / height:
-
-| Scan | Reference | SHARE PCS | A2 mapper |
-|---|---|---|---|
-| Street loop, 282 m (SHARE S20) | RTK along the whole route | 3.2 / 2.8 | **2.4 / 2.6** |
-| Courtyard, 192 m (SHARE S20) | 5 control points | 6.9 / 3.6 | 7.1 / **1.8** |
-| Street block, 777 m (A2) | 7 control points | 25.9 / 29.7 | **18.4** / 29.8 |
-
-Time to the point cloud (no colour), same computer: **6 / 3.7 / 7 min** with A2
-mapper against 11 / 7.3 / 55 min.
-
-Your results will depend on the scanner, the route and the surroundings.
-
 ## Not affiliated
 
-A2 mapper is an independent project. SHARE, SHARE Studio, SHARE PCS and Livox
-are trademarks of their owners; they are named here only to say which recordings
-the program reads.
+A2 mapper is an independent project. SHARE, SHARE Studio and Livox are
+trademarks of their owners; they are named here only to say which recordings the
+program reads.
 
 ## License
 
