@@ -1,0 +1,2 @@
+85fb755deb97e600f2d6a583465bbe54224d7e58443ec2afcafdfddd50a9d2b5 *A2-mapper-v4.exe
+fbdf14f80068700b2b4e1eb8c9898a3de91fd6a43c6726ad4a5f25d0f336fbc3 *A2-mapper-v4.apk
